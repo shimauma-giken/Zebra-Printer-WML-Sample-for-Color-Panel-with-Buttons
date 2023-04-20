@@ -1,0 +1,50 @@
+<!-- Rename img_background src from BLUEBCKDARK288.BMP to Z:BLUEBCKDARK288.BMP -->
+
+<wml>
+    <display>
+    <font name="$(display.wml_font)" vspace="0"></font>
+    <color fgcolor="0xFFFFFFFF" bgcolor="0x00000000"/>
+    <img_background src="Z:BLUEBCKDARK288.BMP"/>
+    
+    <!-- Main  Screen - First Menu Displayed -->
+
+    <card id="main" title="" ontimer="#DoMain" alerts="on" translate="on" password="reset">
+            <timer value="2"></timer>
+       <setvar name="display.password.input" value=""/>
+    
+       <goto_card href="#DoMain"/>
+    </card>
+    
+    <!-- ------------------------------------------------------------------------------------------- -->
+    <!-- ------------------------------------ Idle Menu  ------------------------------------------- -->
+    <!-- ------------------------------------------------------------------------------------------- -->
+    <card id="DoMain" title="" ontimer="#DoMain" alerts="on" translate="on">
+            <timer value="30"></timer>
+    
+       <button_map id="down_button_down_nopass">
+               <setvar name="label.reprint" value=""/>
+       </button_map>
+            <button_map id="up_button_down_nopass">
+                    <a href="QCKCNTMKCOLOR.WML"></a>
+            </button_map>
+    
+       <br/>    
+       <if condition="zpl.no_errors_boot_done = yes">
+               <p align="center" pre-allcaps="on" allcaps="on">PRINTER READY</p>
+       </if>
+            <br/>
+            <if condition="device.user_p2 = ShowVNum"><p>R2.04a</p></if>
+       <br/>
+            <p align="left">      LINK-OS </p>
+            <p >$(appl.link_os_version)</p>
+       <br/><br/>
+       <p align="center" pre-allcaps="on" allcaps="on">$(interface.network.active.ip_addr)</p>
+              <br/><br/>
+       <p align="center" pre-allcaps="on" allcaps="on">$(wlan.mac_addr)</p>    
+       <br/><br/>
+       <p align="center" pre-allcaps="on" allcaps="on">$(device.unique_id)</p>    
+    
+    </card>
+    
+    </display>
+    </wml>

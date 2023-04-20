@@ -1,0 +1,93 @@
+<wml>
+    <display>
+    <!-- ZT500/ZT600 Front Panel System R2.04a -->
+    
+    <font name="$(display.wml_font)" vspace="0"></font>
+    <color fgcolor="0xFFFFFFFF" bgcolor="0x00000000"/>
+    <img_background src="BLUEBCKDARK288.BMP"/>
+    
+    <!-- Main  Screen - First Menu Displayed -->
+    
+    <!-- ------------------------------------------------------------------------------------------- -->
+    <!-- ------------------------------------ Boot Ghosts ------------------------------------------ -->
+    <!--                                                                                             -->
+    <!-- Since the display no longer alternates the IP address display and all Titan printers have   -->
+    <!-- wired Ethernet, there is no longer a need to differentiate between Net and no net displays. -->
+    <!-- Also, a special Error display is not needed because of the same reason.                     -->
+    <!--                                                                                             -->
+    <!-- Note: The <card statement in ALL cards are parsed and executed when the file is loaded,     -->
+    <!--       so the password reset is only needed in the first card                                -->
+    <!--                                                                                             -->
+    <!-- ------------------------------------------------------------------------------------------- -->
+    <card id="main" title="" ontimer="#DoMain" alerts="on" translate="on" password="reset">
+            <timer value="2"></timer>
+       <setvar name="display.password.input" value=""/>
+    
+       <goto_card href="#DoMain"/>
+    </card>
+    
+    <!-- ------------------------------------------------------------------------------------------- -->
+    <!-- ------------------------------------ Idle Menu  ------------------------------------------- -->
+    <!-- ------------------------------------------------------------------------------------------- -->
+    <card id="DoMain" title="" ontimer="#DoMain" alerts="on" translate="on">
+            <timer value="30"></timer>
+    
+       <button_map id="down_button_down_nopass">
+               <setvar name="label.reprint" value=""/>
+       </button_map>
+            <button_map id="up_button_down_nopass">
+                    <a href="QCKCNTMKCOLOR.WML"></a>
+            </button_map>
+    
+       <br/>
+       <p align="left" pre-allcaps="off" allcaps="off">ZEBRA</p>
+       <p align="right" pre-allcaps="off" allcaps="off">$(device.product_name)</p>
+    
+       <br/><br/>
+       <if condition="zpl.no_errors_boot_done = yes">
+               <p align="center" pre-allcaps="on" allcaps="on">PRINTER READY</p>
+       </if>
+            <br/>
+            <if condition="device.user_p2 = ShowVNum"><p>R2.04a </p></if>
+       <br/>
+            <p align="left">      LINK-OS </p>
+            <p >$(appl.link_os_version)</p><br/><br/>
+       <p align="center" pre-allcaps="on" allcaps="on">$(interface.network.active.ip_addr)</p><br/>
+    
+    
+    <!--    This is simply added so that the Select button can be used to Navigate to the menu screen -->
+            <a href="HOMEMENUCOLOR.WML" m3=""></a>
+    
+       <nav_bar>
+              <p1 highlight="off" href="HOMEMENUCOLOR.WML">・/p1>
+             <p2 highlight="off" href="#About">ABOUT</p2>
+            </nav_bar>
+    </card>
+    
+    <!-- ------------------------------------------------------------------------------------------- -->
+    <!-- -------------------------------- Copyright/About ------------------------------------------ -->
+    <!-- ------------------------------------------------------------------------------------------- -->
+    <card id="About" title="" ontimer="HOMEMENUCOLOR.WML" alerts="on" translate="on">
+            <timer value="300"></timer>
+    
+       <br/>
+       <p align="left" pre-allcaps="off" allcaps="off">ZEBRA</p>
+       <p align="right" pre-allcaps="off" allcaps="off">$(device.product_name)</p>
+       <br/><br/>
+    
+            <p align="center" >ZEBRA TECHNOLOGIES</p>
+            <br/>
+            <p align="center" >$(appl.name)</p>
+            <br/>
+            <p align="center" >WML R2.04a ・/p>
+            <br/>
+            <p align="center" >zebra.com/support</p>
+            <br/>
+    
+            <nav_bar>
+                    <p1 fgcolor="0xFFFFFFFF" highlight="off" href="#main">瑳/p1>
+            </nav_bar>
+    </card>
+    
+    </display>
+    </wml>
